@@ -1,0 +1,108 @@
+from datetime import *
+
+def weeks_work():
+
+    total = 0
+    week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    
+    flag = input("Base case (B) or Strange case (S)?: ")
+
+    for i in week:
+        print(i)
+
+        if flag == 'B':
+            res = calculate_hours()
+            res *= 5
+            total += res
+            break
+
+        elif flag == 'S':
+            
+            while (True):
+                res = calculate_hours()
+                total += res
+
+                move = input("New Job (J) or Next Day (D)? :")
+                
+                if move == 'J':
+                    job = get_job()
+                    code = get_code()
+                    res = calculate_hours()
+                    total += res
+
+
+    return total
+
+def calculate_hours():
+
+    hours = get_hours()
+    total = 0
+    
+    start = hours[0]
+    end = hours[1]
+
+    diff = end - start
+    
+    if diff.total_seconds() >= 21600:
+        diff = diff.total_seconds() - 1800
+
+    res = diff / 3600
+    total += res
+
+    return total
+
+def get_hours():
+        
+    start = input("enter start in military time: ")
+    end = input("enter end in military time: ")
+            
+    start_time = datetime.strptime(start, "%H:%M")
+    end_time = datetime.strptime(end, "%H:%M")
+
+    return [start_time, end_time]
+
+def get_job():
+    
+    num = input("Enter Job#: ")
+    jobs = {}
+
+    with open("job_list_test.txt", "r") as job_list:
+        data = job_list.readlines()
+
+        for line in data:
+            key, value = line.strip().split(maxsplit=1)
+            jobs[int(key)] = value.strip()
+            
+    if int(num) in jobs:
+        return (f"{num}: {jobs[int(num)]}")
+
+def get_name():
+    
+    name = input("Enter name of Employee: ")
+    
+    with open("name_list_test.txt", "r") as file:
+        data = file.readlines()
+        file.close()
+
+    for names in data:
+        if name in names:
+            return name
+
+def get_code():
+    code = input("Enter labor code: ")
+    return code
+
+def main():
+
+    info_string = {}
+    
+    name = get_name()
+    job = get_job()
+    code = get_code()
+    hours = weeks_work()
+
+    info_string[name] = [job, code, hours]
+
+    print(info_string)
+    
+main()
