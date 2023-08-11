@@ -1,0 +1,35 @@
+from datetime import *
+
+def week_type(): # determine what week we're working with
+    pass
+
+def calculate_day(): # calculate total hours for strange work day
+    pass
+
+def calculate_week(): # calculate total hours for standard week# 
+    pass
+
+def get_job(): # check if job is in list and return it
+    pass
+
+def get_code() # get code and return it
+    pass
+
+def get_name(): # check if name is in list and return it
+    pass
+
+def add_name(): # add new name to list
+    pass
+
+def add_job(): # add new job to list
+    pass
+
+def calculate_hours(): # calculate difference from start and end times
+    pass
+
+def get_hours(): # start and end times at job
+    pass
+
+def main(): # calls job, name, LC
+
+main()
