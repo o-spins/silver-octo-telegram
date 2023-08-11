@@ -1,0 +1,48 @@
+from datetime import *
+
+def per_day():
+    arr = []
+    week = ['Monday', 'Tuesday']
+
+    for i in week:
+        print(i)
+
+        day_data = {i: []}  
+        while True:
+            job = input("job#: ")
+            if not job:  
+                break
+
+            code = input("code: ")
+
+            start = input("Enter starting time: ")
+            end = input("Enter end time: ")
+
+            start_time = datetime.strptime(start, "%H:%M")
+            end_time = datetime.strptime(end, "%H:%M")
+
+            total = end_time - start_time
+            day_data[i].append(total.total_seconds() / 3600)
+
+            cont = input("Enter next job, or move to next day? (j/d): ")
+            if cont == 'd':
+                break
+
+        arr.append(day_data) 
+    return arr
+
+def main():
+    
+    data = per_day()
+    
+    for day_data in data:
+        
+        for day, hours_list in day_data.items():
+            total_hours = sum(hours_list)
+            
+            day_data[day] = hours_list + [total_hours]
+            
+    print("Daily work data:", data)
+
+main()
+
